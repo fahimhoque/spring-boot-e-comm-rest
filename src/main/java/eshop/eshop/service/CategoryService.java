@@ -5,10 +5,8 @@ import java.util.List;
 import eshop.eshop.model.Category;
 
 public interface CategoryService {
-    Category getCategoryByName(String name);
-    Category addNewCategory(Category category);
+    Category saveCategory(Category category);
+    Category getCategoryById(Long id);
+    void deleteCategory(Long id);
     List<Category> getAllCategories();
-
-    void addProductToCategory(String categoryName, String productName);
-
 }

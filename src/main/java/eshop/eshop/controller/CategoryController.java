@@ -2,9 +2,10 @@ package eshop.eshop.controller;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,24 +23,23 @@ import lombok.extern.slf4j.Slf4j;
 public class CategoryController {
     private final CategoryService categoryService;
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Category>> getAllCategories(){
+    @GetMapping("/all-categories")
+    public ResponseEntity<List<Category>> getAllCategories() {
         log.info("Getting all categories");
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Category> addCategory(@RequestBody Category category){
+    @PostMapping("/add-new-category")
+    public ResponseEntity<Category> addCategory(@RequestBody Category category) {
         log.info("Adding category");
-        return ResponseEntity.ok(categoryService.addNewCategory(category));
+        return ResponseEntity.ok(categoryService.saveCategory(category));
     }
 
-    @PostMapping("/add-product-to-category")
-    public ResponseEntity<String> addProductToCategory(@RequestBody String categoryName, String productName
-    ){
-        log.info("Adding product to category");
-        categoryService.addProductToCategory(categoryName, productName);
-        // return a 200 OK response and success message
-        return ResponseEntity.status(HttpStatus.OK).body("Product added to category");
+    @DeleteMapping("/delete-category/{categoryId}")
+    public ResponseEntity<String> deleteCategory(@PathVariable Category category) {
+        log.info("Deleting category");
+        Long id = category.getId();
+        categoryService.deleteCategory(id);
+        return ResponseEntity.ok("Category with id: " + id + " deleted");
     }
 }

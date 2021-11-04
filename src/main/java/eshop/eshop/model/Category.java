@@ -1,27 +1,30 @@
 package eshop.eshop.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity @Data @AllArgsConstructor @NoArgsConstructor
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = javax.persistence.GenerationType.AUTO)
     private Long id;
     private String name;
-    private String thumbnailUrl;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Product> products = new ArrayList<>();
+    private String image;
+    private boolean active;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Product> products = new HashSet<>();
 }
