@@ -1,8 +1,13 @@
 package eshop.eshop.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,5 +25,6 @@ public class Category {
     private String image;
     private boolean active;
     
-    
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Product> products = new ArrayList<>();
 }
