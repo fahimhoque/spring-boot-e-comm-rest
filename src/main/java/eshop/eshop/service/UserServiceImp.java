@@ -48,8 +48,12 @@ public class UserServiceImp implements UserService, UserDetailsService {
     }
 
     @Override
-    public User saveUser(User user) {
+    public User saveUser(User user, String roleName) {
         log.info("Saving user: {}", user.getName());
+        Role role = roleRepository.findByName(roleName);
+        List<Role> roles = new ArrayList<>();
+        roles.add(role);
+        user.setRoles(roles);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }

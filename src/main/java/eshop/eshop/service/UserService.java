@@ -6,7 +6,7 @@ import eshop.eshop.model.Role;
 import eshop.eshop.model.User;
 
 public interface UserService {
-    User saveUser(User user);
+    User saveUser(User user, String roleName);
     Role saveRole(Role role);
 
     /* Add Role to user*/

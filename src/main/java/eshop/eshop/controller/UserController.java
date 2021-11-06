@@ -47,9 +47,15 @@ public class UserController {
     }
 
     @PostMapping("/users/save")
-    public ResponseEntity<User> saveUser(@RequestBody User user){
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("api/user/save").toUriString());
-        return ResponseEntity.created(uri).body(userService.saveUser(user));
+    public ResponseEntity<User> saveUser(@RequestBody Map<User, String> userMap){
+        // get the first item of the map
+        User user = userMap.keySet().iterator().next();
+        // get the second item of the map
+        String role = userMap.values().iterator().next();
+        // save the user
+        User savedUser = userService.saveUser(user, role);
+        // return the saved user
+        return ResponseEntity.ok(savedUser);
     }
 
     @PostMapping("/role/save")
