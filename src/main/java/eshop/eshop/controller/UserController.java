@@ -47,15 +47,14 @@ public class UserController {
     }
 
     @PostMapping("/users/save")
-    public ResponseEntity<User> saveUser(@RequestBody Map<User, String> userMap){
-        // get the first item of the map
-        User user = userMap.keySet().iterator().next();
-        // get the second item of the map
-        String role = userMap.values().iterator().next();
-        // save the user
-        User savedUser = userService.saveUser(user, role);
-        // return the saved user
-        return ResponseEntity.ok(savedUser);
+    public ResponseEntity<User> saveUser(@RequestBody User user) {
+        User savedUser = userService.saveUser(user);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedUser.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(savedUser);
     }
 
     @PostMapping("/role/save")
