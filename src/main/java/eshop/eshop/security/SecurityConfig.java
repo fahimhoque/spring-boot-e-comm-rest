@@ -37,15 +37,42 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         /*
             ROUTES FOR: Permit all requests to the following paths REGIEST, LOGIN, LOGOUT, FORGOT, RESET
         */
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/auth/**", "/api/v1/token/refresh/**", "/api/v1/category/**", "/api/v1/product/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/auth/**", "/api/v1/category/**", "/api/v1/product/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/v1/auth/**", "/api/v1/category/**", "/api/v1/product/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/v1/auth/**", "/api/v1/category/**", "/api/v1/product/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, 
+        "/api/v1/role/**",
+        "/api/v1/auth/**", 
+        "/api/v1/token/refresh/**", 
+        "/api/v1/category/**", 
+        "/api/v1/product/**",
+        "/api/v1/order/**",
+        "/api/v1/users/**"
+        ).permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST,
+        "/api/v1/role/**",
+        "/api/v1/auth/**", 
+        "/api/v1/category/**", 
+        "/api/v1/product/**", 
+        "/api/v1/order/**",
+        "/api/v1/users/**"
+        ).permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, 
+        "/api/v1/role/**",
+        "/api/v1/auth/**", 
+        "/api/v1/category/**", 
+        "/api/v1/product/**", 
+        "/api/v1/order/**",
+        "/api/v1/auth/**"
+        ).permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, 
+        "/api/v1/auth/**", 
+        "/api/v1/category/**", 
+        "/api/v1/product/**", 
+        "/api/v1/order/**"
+        ).permitAll();
         
         /*
             ROUTES FOR: Permit all requests to the following paths
         */
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/users").hasAuthority("ADMIN");
+        // http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/users").hasAuthority("Admin");
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

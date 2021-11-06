@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,4 +25,10 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
+
+    // @OneToMany(fetch = FetchType.EAGER)
+    // private Collection<Order> orders = new ArrayList<>();
+
+    // @OneToMany(fetch = FetchType.EAGER)
+    // private Collection<Address> addresses = new ArrayList<>();
 }

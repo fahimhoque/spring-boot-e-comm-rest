@@ -40,6 +40,12 @@ public class ProductServiceImp implements ProductService {
         return productRepository.findAll();
     }
 
+    @Override
+    public List<Product> getProductsById(List<Long> productIds) {
+        log.info("Getting products with ids: {}", productIds);
+        return productRepository.findAllById(productIds);
+    }
+
 
 
     

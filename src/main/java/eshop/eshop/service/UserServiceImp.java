@@ -42,6 +42,10 @@ public class UserServiceImp implements UserService, UserDetailsService {
         });
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
+    @Override
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
 
     @Override
     public User saveUser(User user) {

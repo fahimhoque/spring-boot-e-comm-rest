@@ -12,6 +12,7 @@ public interface UserService {
     /* Add Role to user*/
     void addRoleToUser(String username, String roleName);
     User getUser(String username);
+    User getUserById(Long id);
 
     /* 
     TO BE IMPLEMENTED: for each request return only 50 users

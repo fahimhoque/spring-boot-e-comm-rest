@@ -21,4 +21,5 @@ public class Address {
     private String area;
     private String apartment;
     private String note;
+    private Long userId;
 }
